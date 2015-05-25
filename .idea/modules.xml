@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/BlinkMessage.iml" filepath="$PROJECT_DIR$/BlinkMessage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Blink_Message.iml" filepath="$PROJECT_DIR$/Blink_Message.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
