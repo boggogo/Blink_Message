@@ -46,6 +46,15 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
+        <activity
+            android:name=".EditFriendsActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/title_activity_edit_friends"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="koemdzhiev.com.blinkmessage.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

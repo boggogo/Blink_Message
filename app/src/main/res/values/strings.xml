@@ -23,5 +23,7 @@
     <string name="login_error_title"></string>
     <string name="empty_inbox_label">No new Messages!</string>
     <string name="empty_friends_label">Add friends to begin!</string>
+    <string name="menu_edit_friends_label">EditFriends</string>
+    <string name="title_activity_edit_friends">Edit Friends</string>
 </resources>
 
