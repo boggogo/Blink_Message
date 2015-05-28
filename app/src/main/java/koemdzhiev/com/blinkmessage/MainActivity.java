@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
 
 import com.parse.ParseUser;
 
@@ -34,6 +35,9 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //start it here to be available in the Fragment's activity too
+        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ParseUser currentUser = ParseUser.getCurrentUser();
