@@ -26,5 +26,13 @@
     <string name="menu_edit_friends_label">EditFriends</string>
     <string name="title_activity_edit_friends">Edit Friends</string>
     <string name="error_title">We are sorry!</string>
+    <string name="menu_camera_label">menu_camera_title</string>
+    <string name="error_external_storage">There was a problem accessing your device\'s external storage</string>
+    <string-array name="camera_choices">
+        <item>Take Picture</item>
+        <item>Take Video</item>
+        <item>Choose Picture</item>
+        <item>Choose Video</item>
+    </string-array>
 </resources>
 

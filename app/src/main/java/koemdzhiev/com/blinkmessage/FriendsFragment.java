@@ -58,7 +58,6 @@ public class FriendsFragment extends ListFragment {
                     mFriends = friends;
 
                     String[] friendNames = new String[mFriends.size()];
-
                     int i = 0;
                     for (ParseUser friend : mFriends) {
                         friendNames[i] = friend.getUsername();

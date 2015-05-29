@@ -1,7 +1,12 @@
 package koemdzhiev.com.blinkmessage;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
@@ -11,11 +16,102 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
+import android.widget.Toast;
 
 import com.parse.ParseUser;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 
 public class MainActivity extends AppCompatActivity implements ActionBar.TabListener {
+    public static final int TAKE_PHOTO_REQUEST = 0;
+    public static final int TAKE_VIDEO_REQUEST = 1;
+    public static final int PICK_PHOTO_REQUEST = 2;
+    public static final int PICK_VIDEO_REQUEST = 3;
+
+    public static final int MEDIA_TYPE_IMAGE = 4;
+    public static final int MEDIA_TYPE_VIDEO = 5;
+
+    // media path as Uri (Uniform resource unifier) unify system resorses
+    protected Uri mMediaUri;
+
+    protected DialogInterface.OnClickListener mDialogListener = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            switch (which){
+                case 0:  //Take picture
+                    Intent takePhotoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    mMediaUri = getOutputMediaFileUrl(MEDIA_TYPE_IMAGE);
+                    if(mMediaUri == null){
+                        // display an error
+                        Toast.makeText(MainActivity.this,getString(R.string.error_external_storage),Toast.LENGTH_LONG).show();
+                    }
+                    takePhotoIntent.putExtra(MediaStore.EXTRA_OUTPUT,mMediaUri);
+                    startActivityForResult(takePhotoIntent, TAKE_PHOTO_REQUEST);
+                    break;
+                case 1:
+                    break; //Take video
+                case 2:
+                    break; //Choose picture
+                case 3:
+                    break; //Choose video
+            }
+        }
+
+        private Uri getOutputMediaFileUrl(int mediaType) {
+            if(isExternalStoreageAvailable()){
+                //get URI
+
+                // 1. Get the external storage directory
+                String appName = MainActivity.this.getString(R.string.app_name);
+                File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
+                                            appName);
+                Log.d(TAG,mediaStorageDir + "");
+                // 2. Create our subdirectory
+                if(! mediaStorageDir.exists()){
+                    //creates directory. IF it fails returns false otherwise it creates the directory and returns true
+                    if(! mediaStorageDir.mkdirs()){
+                        Log.e(TAG,"Failer to create directory");
+                        return null;
+                    };
+                }
+                // 3. Create a file name
+                // 4. Create the file
+                File mediaFile;
+                Date now = new Date();
+                String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.UK).format(now);
+                String path = mediaStorageDir.getPath() + File.separator;
+                if(mediaType == MEDIA_TYPE_IMAGE){
+                    mediaFile = new File(path + "IMG_" + timestamp + ".jpg");
+                }else if (mediaType == MEDIA_TYPE_VIDEO){
+                    mediaFile = new File(path + "VID_" + timestamp + ".mp4");
+                }else{
+                    return null;
+                }
+
+                // 5. Return the file's uri
+                Log.d(TAG,"File: " + Uri.fromFile(mediaFile));
+                return Uri.fromFile(mediaFile);
+            }else{
+                return null;
+            }
+
+        }
+
+        private boolean isExternalStoreageAvailable(){
+            String state = Environment.getExternalStorageState();
+            if(state.equals(Environment.MEDIA_MOUNTED)){
+                return true;
+            }else{
+                return false;
+            }
+        }
+    };
+
+
 
     private static final String TAG = AppCompatActivity.class.getSimpleName();
     /**
@@ -37,8 +133,8 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
     protected void onCreate(Bundle savedInstanceState) {
         //start it here to be available in the Fragment's activity too
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         ParseUser currentUser = ParseUser.getCurrentUser();
         if(currentUser == null) {
@@ -103,16 +199,20 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_logout) {
-            ParseUser.logOut();
-            navigateToLogin();
-
-        } else if (id == R.id.action_edit_friends){
-            Intent intent = new Intent(this,EditFriendsActivity.class);
-            startActivity(intent);
+        switch (id){
+            case R.id.action_logout:
+                ParseUser.logOut();
+                navigateToLogin();
+            case R.id.action_edit_friends:
+                Intent intent = new Intent(this,EditFriendsActivity.class);
+                startActivity(intent);
+            case R.id.action_camera:
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setItems(R.array.camera_choices,mDialogListener);
+                AlertDialog dialog = builder.create();
+                dialog.show();
         }
+        //noinspection SimplifiableIfStatement
 
         return super.onOptionsItemSelected(item);
     }

@@ -84,24 +84,28 @@ public class EditFriendsActivity extends ListActivity {
         mFriendsRelation.getQuery().findInBackground(new FindCallback<ParseUser>() {
             @Override
             public void done(List<ParseUser> friends, ParseException e) {
-                if(e == null){
+                if (e == null) {
                     //list returned - look for a match
-                    for(int i = 0;i<mUsers.size();i++){
+                    for (int i = 0; i < mUsers.size(); i++) {
                         ParseUser user = mUsers.get(i);
 
-                        for(ParseUser friend:friends){
-                            if(friend.getObjectId().equals(user.getObjectId())){
-                                getListView().setItemChecked(i,true);
+                        for (ParseUser friend : friends) {
+                            if (friend.getObjectId().equals(user.getObjectId())) {
+                                getListView().setItemChecked(i, true);
                             }
                         }
                     }
-                }else{
-                    Log.e(TAG,e.getMessage());
+                    //Toast.makeText(EditFriendsActivity.this, "total num of users: " + mUsers.size() + ", firends: " + friends.size(), Toast.LENGTH_LONG).show();
+                }
+                else {
+                    Log.e(TAG, e.getMessage());
                 }
             }
         });
+
+
     }
-    
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
