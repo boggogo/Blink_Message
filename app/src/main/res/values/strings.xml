@@ -23,7 +23,7 @@
     <string name="login_error_title"></string>
     <string name="empty_inbox_label">No new Messages!</string>
     <string name="empty_friends_label">Add friends to begin!</string>
-    <string name="menu_edit_friends_label">EditFriends</string>
+    <string name="menu_edit_friends_label">Edit Friends</string>
     <string name="title_activity_edit_friends">Edit Friends</string>
     <string name="error_title">We are sorry!</string>
     <string name="menu_camera_label">menu_camera_title</string>
@@ -38,5 +38,7 @@
         <item>Choose Picture</item>
         <item>Choose Video</item>
     </string-array>
+    <string name="title_activity_recipients">Choose Recipients</string>
+    <string name="Empty_recipients_list_message">Choose some friends first!</string>
 </resources>
 
