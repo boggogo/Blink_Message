@@ -28,6 +28,10 @@
     <string name="error_title">We are sorry!</string>
     <string name="menu_camera_label">menu_camera_title</string>
     <string name="error_external_storage">There was a problem accessing your device\'s external storage</string>
+    <string name="general_error">Sorry, there was an error!</string>
+    <string name="video_size_warning">The size of the video must be less than 10 MB!</string>
+    <string name="error_open_file">There was an error openning the file!</string>
+    <string name="file_too_large">The selected file is too large!</string>
     <string-array name="camera_choices">
         <item>Take Picture</item>
         <item>Take Video</item>
