@@ -3,8 +3,10 @@
       xmlns:tools="http://schemas.android.com/tools"
       tools:context="koemdzhiev.com.blinkmessage.RecipientsActivity">
 
-    <item android:id="@+id/action_settings"
-          android:title="@string/action_settings"
+    <item android:id="@+id/action_send"
+          android:title="@string/menu_send_label"
           android:orderInCategory="100"
-          app:showAsAction="never"/>
+          android:visible="false"
+          android:icon="@drawable/ic_send_white_48dp"
+          android:showAsAction="always"/>
 </menu>
