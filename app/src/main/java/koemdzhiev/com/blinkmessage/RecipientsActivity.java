@@ -2,6 +2,7 @@ package koemdzhiev.com.blinkmessage;
 
 import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -13,10 +14,12 @@ import android.widget.ListView;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseRelation;
 import com.parse.ParseUser;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -25,6 +28,9 @@ public class RecipientsActivity extends ListActivity {
     protected List<ParseUser> mFriends;
     protected ParseUser mCurrentUser;
     protected MenuItem mSendMenuItem;
+    protected Uri mMediaUri;
+    protected String mFileType;
+
     protected ParseRelation<ParseUser> mFriendsRelation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +40,9 @@ public class RecipientsActivity extends ListActivity {
 
         getListView().setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         getActionBar().setDisplayHomeAsUpEnabled(true);
+
+        mMediaUri = getIntent().getData();
+        mFileType = getIntent().getExtras().getString(ParseConstants.KEY_FILE_TYPE);
     }
     @Override
     public void onResume() {
@@ -94,6 +103,8 @@ public class RecipientsActivity extends ListActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_send) {
+            ParseObject message = createMessage();
+            //send(message);
             return true;
         }
 
@@ -109,5 +120,26 @@ public class RecipientsActivity extends ListActivity {
             mSendMenuItem.setVisible(false);
         }
 
+    }
+
+    protected  ParseObject createMessage(){
+        ParseObject message = new ParseObject(ParseConstants.CLASS_MESSAGES);
+        message.put(ParseConstants.KEY_SENDER_ID,ParseUser.getCurrentUser().getObjectId());
+        message.put(ParseConstants.KEY_SENDER_NAME,ParseUser.getCurrentUser().getUsername());
+        message.put(ParseConstants.KEY_RECIPIENT_IDS, getRecipientIds());
+        message.put(ParseConstants.KEY_FILE_TYPE,mFileType);
+
+        return message;
+    }
+
+    protected ArrayList<String> getRecipientIds(){
+        ArrayList<String> recipientIds = new ArrayList<>();
+        for(int i = 0;i < getListView().getCount(); i++){
+            if(getListView().isItemChecked(i)){
+                recipientIds.add(mFriends.get(i).getObjectId());
+            }
+        }
+
+        return recipientIds;
     }
 }
