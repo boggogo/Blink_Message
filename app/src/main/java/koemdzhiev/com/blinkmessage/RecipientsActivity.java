@@ -11,13 +11,16 @@ import android.view.View;
 import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseRelation;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -104,7 +107,20 @@ public class RecipientsActivity extends ListActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_send) {
             ParseObject message = createMessage();
-            //send(message);
+            if(message == null){
+                //error
+                AlertDialog.Builder  builder = new AlertDialog.Builder(this);
+                builder.setTitle(getString(R.string.error_selecting_tile_title));
+                builder.setMessage(getString(R.string.error_selecting_file));
+                builder.setPositiveButton(android.R.string.ok, null);
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }else {
+                //send
+                send(message);
+            }
+
+            finish();
             return true;
         }
 
@@ -127,9 +143,23 @@ public class RecipientsActivity extends ListActivity {
         message.put(ParseConstants.KEY_SENDER_ID,ParseUser.getCurrentUser().getObjectId());
         message.put(ParseConstants.KEY_SENDER_NAME,ParseUser.getCurrentUser().getUsername());
         message.put(ParseConstants.KEY_RECIPIENT_IDS, getRecipientIds());
-        message.put(ParseConstants.KEY_FILE_TYPE,mFileType);
+        message.put(ParseConstants.KEY_FILE_TYPE, mFileType);
 
-        return message;
+        byte[] fileBytes = FileHelper.getByteArrayFromFile(this,mMediaUri);
+        if(fileBytes == null){
+            return null;
+        }else{
+            if(mFileType.equals(ParseConstants.TYPE_IMAGE)){
+                fileBytes = FileHelper.reduceImageForUpload(fileBytes);
+            }
+
+            String fileName = FileHelper.getFileName(this,mMediaUri,mFileType);
+            ParseFile file = new ParseFile(fileName,fileBytes);
+            message.put(ParseConstants.KEY_FILE, file);
+
+            return message;
+        }
+
     }
 
     protected ArrayList<String> getRecipientIds(){
@@ -141,5 +171,24 @@ public class RecipientsActivity extends ListActivity {
         }
 
         return recipientIds;
+    }
+
+    protected void send(ParseObject message){
+        message.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if(e == null){
+                    //sueccess!
+                    Toast.makeText(RecipientsActivity.this,getString(R.string.success_message),Toast.LENGTH_LONG).show();
+                }else {
+                    AlertDialog.Builder  builder = new AlertDialog.Builder(RecipientsActivity.this);
+                    builder.setTitle(getString(R.string.error_selecting_tile_title));
+                    builder.setMessage(getString(R.string.error_sending_message));
+                    builder.setPositiveButton(android.R.string.ok, null);
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
+            }
+        });
     }
 }
