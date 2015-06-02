@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.widget.Toast;
 
+import com.parse.ParseObject;
 import com.parse.ParseUser;
 
 import java.io.File;
@@ -26,6 +27,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 
@@ -38,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
     public static final int MEDIA_TYPE_IMAGE = 4;
     public static final int MEDIA_TYPE_VIDEO = 5;
+
 
     // media path as Uri (Uniform resource unifier) unify system resorses
     protected Uri mMediaUri;
