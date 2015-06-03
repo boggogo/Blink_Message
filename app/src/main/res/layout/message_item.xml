@@ -27,4 +27,15 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:layout_toRightOf="@+id/messageIcon"
         android:layout_toEndOf="@+id/messageIcon"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text=" created at: 03.17.15"
+        android:id="@+id/createdAtLabel"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/senderLabel"
+        android:layout_toEndOf="@+id/senderLabel"/>
 </RelativeLayout>
