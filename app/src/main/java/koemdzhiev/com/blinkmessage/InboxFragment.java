@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -16,6 +17,7 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -48,17 +50,21 @@ public class InboxFragment extends ListFragment {
                 if(e == null){
                     //success, we found messages
                     mMessages = messages;
-//
-//                    String[] friendNames = new String[mMessages.size()];
-//
-//                    int i = 0;
-//                    for (ParseObject message : mMessages) {
-//                        friendNames[i] = message.getString(ParseConstants.KEY_SENDER_NAME);
-//                        i++;
-//                    }
 
-                    MessageAdapter adapter = new MessageAdapter(getListView().getContext(), mMessages);
-                    setListAdapter(adapter);
+                    String[] friendNames = new String[mMessages.size()];
+
+                    int i = 0;
+                    for (ParseObject message : mMessages) {
+                        friendNames[i] = message.getString(ParseConstants.KEY_SENDER_NAME);
+                        i++;
+                    }
+                    if(getListView().getAdapter() == null) {
+                        MessageAdapter adapter = new MessageAdapter(getListView().getContext(), mMessages);
+                        setListAdapter(adapter);
+                    }else{
+                        //refill, this method prevents the adapter to go to the top of the list
+                        ((MessageAdapter)(getListView().getAdapter())).refill(mMessages);
+                    }
                 }
             }
         });
@@ -83,6 +89,24 @@ public class InboxFragment extends ListFragment {
             Intent intent = new Intent(Intent.ACTION_VIEW,fileUri);
             intent.setDataAndType(fileUri,"video/*");
             startActivity(intent);
+        }
+
+        //delete the message
+
+        List<String> ids = message.getList(ParseConstants.KEY_RECIPIENT_IDS);
+        Toast.makeText(getListView().getContext(),ids.size()+"",Toast.LENGTH_LONG).show();
+        if(ids.size() == 1){
+            //last recipient - delete message
+            message.deleteEventually();
+        }else{
+            //remove recipient and save
+            ids.remove(ParseUser.getCurrentUser().getObjectId());
+
+            ArrayList<String> idsToRemove = new ArrayList<>();
+            idsToRemove.add(ParseUser.getCurrentUser().getObjectId());
+            message.removeAll(ParseConstants.KEY_RECIPIENT_IDS,idsToRemove);
+            message.saveInBackground();
+
         }
     }
 }

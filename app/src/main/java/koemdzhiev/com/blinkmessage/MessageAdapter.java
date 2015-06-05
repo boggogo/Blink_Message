@@ -61,4 +61,10 @@ public class MessageAdapter extends ArrayAdapter<ParseObject> {
         TextView nameLabel;
         TextView createdAtLabel;
     }
+    //refill, this method prevents the adapter to go to the top of the list
+    public void refill(List<ParseObject> messages){
+        messages.clear();
+        messages.addAll(messages);
+        notifyDataSetChanged();
+    }
 }
