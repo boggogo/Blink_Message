@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -25,8 +24,6 @@ public class LoginActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //progress bar
-        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_login);
 
         mSignUpTextView = (TextView) findViewById(R.id.signupText);
@@ -59,14 +56,10 @@ public class LoginActivity extends Activity {
                     AlertDialog dialog = builder.create();
                     dialog.show();
                 }else{
-                    //show the progress bar
-                    setProgressBarIndeterminateVisibility(true);
                     //check if user exists
                     ParseUser.logInInBackground(username, password, new LogInCallback() {
                         @Override
                         public void done(ParseUser user, ParseException e) {
-                            //hide the progress bar
-                            setProgressBarIndeterminateVisibility(false);
                             if(e == null){
                                 //Success!
                                 Intent intent = new Intent(LoginActivity.this,MainActivity.class);
