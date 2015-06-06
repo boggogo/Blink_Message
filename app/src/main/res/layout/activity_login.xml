@@ -16,41 +16,88 @@
         android:scaleType="fitStart"
         android:contentDescription="@string/content_desc_background"/>
 
-    <EditText
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/userNameField"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/app_name"
+        android:id="@+id/title"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:hint="@string/username_hint"/>
+        android:layout_centerHorizontal="true"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="32dp"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/subtitle"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:textSize="13sp"
+        android:id="@+id/subTitle"
+        android:layout_below="@+id/title"
+        android:layout_centerHorizontal="true"/>
 
-    <EditText
+    <LinearLayout
+        android:id="@+id/editTextLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/passwordField"
-        android:layout_below="@+id/userNameField"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:hint="@string/password_hint"
-        android:inputType="textPassword"/>
+        android:layout_below="@id/subTitle"
+        android:layout_marginTop="@dimen/login_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:background="@android:color/white"
+        android:paddingLeft="@dimen/login_horizontal_padding"
+        android:paddingRight="@dimen/login_horizontal_padding"
+        android:paddingTop="@dimen/activity_horizontal_margin"
+        android:paddingBottom="@dimen/activity_horizontal_margin"
+        android:orientation="vertical">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/light_gray"
+            android:textSize="17sp"
+            android:id="@+id/userNameField"
+            android:hint="@string/username_hint"/>
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/passwordField"
+            android:textColorHint="@color/light_gray"
+            android:textSize="17sp"
+            android:hint="@string/password_hint"
+            android:inputType="textPassword"/>
+
+    </LinearLayout>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/loginButton"
-        android:layout_below="@+id/passwordField"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:text="@string/login_button_lavel"/>
+        android:text="@string/login_button_lavel"
+        android:background="@drawable/button_custom"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:textSize="13sp"
+        android:textColor="@color/text_color"
+        android:layout_below="@+id/editTextLayout"
+        android:layout_centerHorizontal="true"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/signupText"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:text="@string/sign_up_text"/>
+        android:id="@+id/signUpText"
+        android:text="@string/sign_up_text"
+        android:layout_marginBottom="97dp"
+        android:layout_below="@id/loginButton"
+        android:textColor="@android:color/white"
+        android:layout_centerHorizontal="true"/>
+
 
 </RelativeLayout>
