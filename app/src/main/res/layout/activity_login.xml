@@ -4,18 +4,18 @@
                 android:layout_height="match_parent"
                 tools:context="koemdzhiev.com.blinkmessage.LoginActivity"
                 style="@style/AuthBackground">
-
-    <ImageView
-        android:id="@+id/backgroundImage"
-        style="@style/AuthBackgroundImage"
-        android:contentDescription="@string/content_desc_background"/>
-
     <ProgressBar
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/progressBar"
         android:layout_centerInParent="true"/>
+
+
+    <ImageView
+        android:id="@+id/backgroundImage"
+        style="@style/AuthBackgroundImage"
+        android:contentDescription="@string/content_desc_background"/>
 
     <TextView
         android:text="@string/app_name"
@@ -29,18 +29,7 @@
 
     <LinearLayout
         android:id="@+id/editTextLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/subTitle"
-        android:layout_marginTop="@dimen/login_vertical_margin"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:background="@android:color/white"
-        android:paddingLeft="@dimen/login_horizontal_padding"
-        android:paddingRight="@dimen/login_horizontal_padding"
-        android:paddingTop="@dimen/activity_horizontal_margin"
-        android:paddingBottom="@dimen/activity_horizontal_margin"
-        android:orientation="vertical">
+        style="@style/AuthFiledContainer">
 
         <EditText
             android:layout_width="match_parent"
