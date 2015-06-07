@@ -20,7 +20,7 @@
     <string name="signup_error_message">Please make sure to enter a username, password and emal address!</string>
     <string name="signup_error_title">Oops!</string>
     <string name="login_error_message">Please make sure to enter a username and password!</string>
-    <string name="login_error_title"></string>
+    <string name="login_error_title">CANCEL</string>
     <string name="empty_inbox_label">No new Messages!</string>
     <string name="empty_friends_label">Add friends to begin!</string>
     <string name="menu_edit_friends_label">Edit Friends</string>
@@ -48,5 +48,7 @@
     <string name="title_activity_view_image">Blink Message</string>
     <string name="content_desc_background">Ribit Frog Background Image</string>
     <string name="subtitle">A Treehouse Project</string>
+    <string name="cancel_button_label">CANCEL</string>
+    <string name="content_desc_button_divider">Button divider</string>
 </resources>
 
