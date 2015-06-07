@@ -31,7 +31,11 @@ public class LoginActivity extends Activity {
         setContentView(R.layout.activity_login);
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
         mProgressBar.setVisibility(View.INVISIBLE);
-        mProgressBar.setIndeterminateDrawable(getDrawable(R.drawable.progress));
+        if(android.os.Build.VERSION.SDK_INT < 17) {
+            mProgressBar.setIndeterminateDrawable(getResources().getDrawable(R.drawable.progress));
+        }else{
+            mProgressBar.setIndeterminateDrawable(getResources().getDrawable(R.drawable.progress,getTheme()));
+        }
         mSignUpTextView = (TextView) findViewById(R.id.signUpText);
         mSignUpTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,7 +59,7 @@ public class LoginActivity extends Activity {
                 username = username.trim();
                 password = password.trim();
 
-                if(username.isEmpty() || password.isEmpty()){
+                if (username.isEmpty() || password.isEmpty()) {
                     mProgressBar.setVisibility(View.INVISIBLE);
                     AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                     builder.setMessage(R.string.login_error_message);
@@ -64,19 +68,19 @@ public class LoginActivity extends Activity {
 
                     AlertDialog dialog = builder.create();
                     dialog.show();
-                }else{
+                } else {
                     //check if user exists
                     ParseUser.logInInBackground(username, password, new LogInCallback() {
                         @Override
                         public void done(ParseUser user, ParseException e) {
-                            if(e == null){
+                            if (e == null) {
                                 //Success!
                                 mProgressBar.setVisibility(View.INVISIBLE);
-                                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intent);
-                            }else{
+                            } else {
                                 mProgressBar.setVisibility(View.INVISIBLE);
                                 AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                                 builder.setMessage(R.string.login_error_message);
