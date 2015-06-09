@@ -7,6 +7,6 @@
           android:title="@string/menu_send_label"
           android:orderInCategory="100"
           android:visible="false"
-          android:icon="@drawable/ic_send_white_48dp"
+          android:icon="@mipmap/ic_menu_send"
           android:showAsAction="always"/>
 </menu>
