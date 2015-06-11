@@ -1,4 +1,4 @@
-package koemdzhiev.com.blinkmessage;
+package koemdzhiev.com.blinkmessage.ui;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -27,6 +27,10 @@ import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+
+import koemdzhiev.com.blinkmessage.utils.ParseConstants;
+import koemdzhiev.com.blinkmessage.R;
+import koemdzhiev.com.blinkmessage.adapters.SectionsPagerAdapter;
 
 
 public class MainActivity extends ActionBarActivity implements ActionBar.TabListener {

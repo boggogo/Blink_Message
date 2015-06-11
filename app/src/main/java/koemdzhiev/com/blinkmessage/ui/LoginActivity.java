@@ -1,4 +1,4 @@
-package koemdzhiev.com.blinkmessage;
+package koemdzhiev.com.blinkmessage.ui;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -15,6 +15,8 @@ import android.widget.TextView;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
+
+import koemdzhiev.com.blinkmessage.R;
 
 
 public class LoginActivity extends Activity {

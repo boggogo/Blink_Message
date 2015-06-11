@@ -1,4 +1,4 @@
-package koemdzhiev.com.blinkmessage;
+package koemdzhiev.com.blinkmessage.ui;
 
 import android.app.AlertDialog;
 import android.app.ListActivity;
@@ -18,6 +18,9 @@ import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import java.util.List;
+
+import koemdzhiev.com.blinkmessage.utils.ParseConstants;
+import koemdzhiev.com.blinkmessage.R;
 
 
 public class EditFriendsActivity extends ListActivity {

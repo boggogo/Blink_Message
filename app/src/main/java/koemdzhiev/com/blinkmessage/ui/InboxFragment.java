@@ -1,4 +1,4 @@
-package koemdzhiev.com.blinkmessage;
+package koemdzhiev.com.blinkmessage.ui;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -19,6 +19,10 @@ import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import koemdzhiev.com.blinkmessage.adapters.MessageAdapter;
+import koemdzhiev.com.blinkmessage.utils.ParseConstants;
+import koemdzhiev.com.blinkmessage.R;
 
 /**
  * Created by koemdzhiev on 27/05/2015.

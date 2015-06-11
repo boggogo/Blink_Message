@@ -2,7 +2,7 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:context="koemdzhiev.com.blinkmessage.LoginActivity"
+                tools:context="koemdzhiev.com.blinkmessage.ui.LoginActivity"
                 style="@style/AuthBackground">
     <ProgressBar
         style="?android:attr/progressBarStyleLarge"

@@ -1,4 +1,4 @@
-package koemdzhiev.com.blinkmessage;
+package koemdzhiev.com.blinkmessage.adapters;
 
 /**
  * Created by koemdzhiev on 27/05/2015.
@@ -10,6 +10,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.Locale;
+
+import koemdzhiev.com.blinkmessage.R;
+import koemdzhiev.com.blinkmessage.ui.FriendsFragment;
+import koemdzhiev.com.blinkmessage.ui.InboxFragment;
 
 /**
  * A {@link FragmentPagerAdapter} that returns a fragment corresponding to

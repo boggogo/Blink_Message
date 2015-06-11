@@ -1,4 +1,4 @@
-package koemdzhiev.com.blinkmessage;
+package koemdzhiev.com.blinkmessage.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

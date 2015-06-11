@@ -1,4 +1,4 @@
-package koemdzhiev.com.blinkmessage;
+package koemdzhiev.com.blinkmessage.ui;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
@@ -16,6 +16,9 @@ import com.parse.ParseRelation;
 import com.parse.ParseUser;
 
 import java.util.List;
+
+import koemdzhiev.com.blinkmessage.utils.ParseConstants;
+import koemdzhiev.com.blinkmessage.R;
 
 /**
  * Created by koemdzhiev on 27/05/2015.

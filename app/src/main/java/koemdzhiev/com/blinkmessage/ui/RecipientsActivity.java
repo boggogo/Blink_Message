@@ -1,4 +1,4 @@
-package koemdzhiev.com.blinkmessage;
+package koemdzhiev.com.blinkmessage.ui;
 
 import android.app.AlertDialog;
 import android.app.ListActivity;
@@ -24,6 +24,10 @@ import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import koemdzhiev.com.blinkmessage.utils.FileHelper;
+import koemdzhiev.com.blinkmessage.utils.ParseConstants;
+import koemdzhiev.com.blinkmessage.R;
 
 
 public class RecipientsActivity extends ListActivity {
@@ -145,7 +149,7 @@ public class RecipientsActivity extends ListActivity {
         message.put(ParseConstants.KEY_RECIPIENT_IDS, getRecipientIds());
         message.put(ParseConstants.KEY_FILE_TYPE, mFileType);
 
-        byte[] fileBytes = FileHelper.getByteArrayFromFile(this,mMediaUri);
+        byte[] fileBytes = FileHelper.getByteArrayFromFile(this, mMediaUri);
         if(fileBytes == null){
             return null;
         }else{

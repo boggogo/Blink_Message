@@ -1,4 +1,4 @@
-package koemdzhiev.com.blinkmessage;
+package koemdzhiev.com.blinkmessage.utils;
 
 /**
  * Created by koemdzhiev on 28/05/2015.

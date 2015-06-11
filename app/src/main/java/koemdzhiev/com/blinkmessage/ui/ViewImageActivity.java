@@ -1,4 +1,4 @@
-package koemdzhiev.com.blinkmessage;
+package koemdzhiev.com.blinkmessage.ui;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.Timer;
 import java.util.TimerTask;
+
+import koemdzhiev.com.blinkmessage.R;
 
 
 public class ViewImageActivity extends ActionBarActivity {

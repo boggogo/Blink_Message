@@ -1,4 +1,4 @@
-package koemdzhiev.com.blinkmessage;
+package koemdzhiev.com.blinkmessage.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,6 +12,9 @@ import com.parse.ParseObject;
 
 import java.util.List;
 
+import koemdzhiev.com.blinkmessage.utils.ParseConstants;
+import koemdzhiev.com.blinkmessage.R;
+
 /**
  * Created by koemdzhiev on 03/06/2015.
  */
@@ -20,7 +23,7 @@ public class MessageAdapter extends ArrayAdapter<ParseObject> {
     protected List<ParseObject> mMessages;
 
     public MessageAdapter(Context context, List<ParseObject> messages) {
-        super(context,R.layout.message_item,messages);
+        super(context, R.layout.message_item,messages);
         mContext = context;
         mMessages = messages;
     }
