@@ -6,19 +6,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.parse.ParseUser;
+import com.squareup.picasso.Picasso;
 
 import java.util.Date;
 import java.util.List;
 
 import koemdzhiev.com.blinkmessage.R;
+import koemdzhiev.com.blinkmessage.utils.MD5Util;
 
 /**
  * Created by koemdzhiev on 03/06/2015.
  */
 public class UserAdapter extends ArrayAdapter<ParseUser> {
+    private static final String TAG = UserAdapter.class.getSimpleName();
     protected Context mContext;
     protected List<ParseUser> mUsers;
 
@@ -35,7 +39,7 @@ public class UserAdapter extends ArrayAdapter<ParseUser> {
         if(convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.user_item, null);
             holder = new ViewHolder();
-            //holder.iconImageView = (ImageView) convertView.findViewById(R.id.messageIcon);
+            holder.userImageView = (ImageView) convertView.findViewById(R.id.userImageView);
             holder.nameLabel = (TextView) convertView.findViewById(R.id.nameLabel);
             convertView.setTag(holder);
         }else{
@@ -43,6 +47,18 @@ public class UserAdapter extends ArrayAdapter<ParseUser> {
         }
 
         ParseUser user = mUsers.get(position);
+        String email = user.getEmail().toLowerCase();
+
+        if(email.equals("")){
+            holder.userImageView.setImageResource(R.mipmap.avatar_empty);
+        }else {
+            String hash = MD5Util.md5Hex(email);
+            String gravatarUrl = "http://www.gravatar.com/avatar/"+hash + "?s=204&d=404";
+
+            Picasso.with(mContext).load(gravatarUrl)
+                    .placeholder(R.mipmap.avatar_empty)
+                    .into(holder.userImageView);
+        }
         Date createdAt = user.getCreatedAt();
 
         Long now = new Date().getTime();
@@ -64,7 +80,7 @@ public class UserAdapter extends ArrayAdapter<ParseUser> {
     }
 
     private static class ViewHolder{
-        //ImageView iconImageView;
+        ImageView userImageView;
         TextView nameLabel;
     }
     //refill, this method prevents the adapter to go to the top of the list
