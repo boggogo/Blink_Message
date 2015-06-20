@@ -53,7 +53,7 @@ public class UserAdapter extends ArrayAdapter<ParseUser> {
             holder.userImageView.setImageResource(R.mipmap.avatar_empty);
         }else {
             String hash = MD5Util.md5Hex(email);
-            String gravatarUrl = "http://www.gravatar.com/avatar/"+hash + "?s=204&d=404";
+            String gravatarUrl = "http://www.gravatar.com/avatar/" + hash + "?s=204&d=404";
 
             Picasso.with(mContext).load(gravatarUrl)
                     .placeholder(R.mipmap.avatar_empty)
