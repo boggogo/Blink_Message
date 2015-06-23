@@ -1,18 +1,17 @@
 package koemdzhiev.com.blinkmessage.adapters;
 
 import android.content.Context;
-import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.parse.ParseUser;
 import com.squareup.picasso.Picasso;
 
-import java.util.Date;
 import java.util.List;
 
 import koemdzhiev.com.blinkmessage.R;
@@ -41,6 +40,7 @@ public class UserAdapter extends ArrayAdapter<ParseUser> {
             holder = new ViewHolder();
             holder.userImageView = (ImageView) convertView.findViewById(R.id.userImageView);
             holder.nameLabel = (TextView) convertView.findViewById(R.id.nameLabel);
+            holder.checkImageView = (ImageView) convertView.findViewById(R.id.checkImageView);
             convertView.setTag(holder);
         }else{
             holder = (ViewHolder) convertView.getTag();
@@ -59,28 +59,21 @@ public class UserAdapter extends ArrayAdapter<ParseUser> {
                     .placeholder(R.mipmap.avatar_empty)
                     .into(holder.userImageView);
         }
-        Date createdAt = user.getCreatedAt();
 
-        Long now = new Date().getTime();
-        String convertedData = DateUtils.getRelativeTimeSpanString(
-                createdAt.getTime(),
-                now,
-                DateUtils.SECOND_IN_MILLIS).toString();
-//
-//        if(user.getString(ParseConstants.KEY_FILE_TYPE).equals(ParseConstants.TYPE_IMAGE)){
-//            holder.iconImageView.setImageResource(R.mipmap.ic_picture);
-//        }else{
-//            holder.iconImageView.setImageResource(R.mipmap.ic_video);
-//        }
-       // holder.createdAtLabel.setText(convertedData);
-        //Log.i(MessageAdapter.class.getSimpleName(),user.getCreatedAt().toString());
         holder.nameLabel.setText(user.getUsername());
 
+        GridView gridView = (GridView) parent;
+        if(gridView.isItemChecked(position)){
+            holder.checkImageView.setVisibility(View.VISIBLE);
+        }else{
+            holder.checkImageView.setVisibility(View.INVISIBLE);
+        }
        return convertView;
     }
 
     private static class ViewHolder{
         ImageView userImageView;
+        ImageView checkImageView;
         TextView nameLabel;
     }
     //refill, this method prevents the adapter to go to the top of the list
