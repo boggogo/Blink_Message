@@ -17,6 +17,7 @@ import com.parse.ParseException;
 import com.parse.ParseUser;
 
 import koemdzhiev.com.blinkmessage.R;
+import koemdzhiev.com.blinkmessage.utils.RibbitApplication;
 
 
 public class LoginActivity extends Activity {
@@ -77,6 +78,7 @@ public class LoginActivity extends Activity {
                         public void done(ParseUser user, ParseException e) {
                             if (e == null) {
                                 //Success!
+                                RibbitApplication.updateParseInstalation(user);
                                 mProgressBar.setVisibility(View.INVISIBLE);
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

@@ -14,6 +14,7 @@ import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
 import koemdzhiev.com.blinkmessage.R;
+import koemdzhiev.com.blinkmessage.utils.RibbitApplication;
 
 
 public class SignUpActivity extends Activity {
@@ -76,6 +77,7 @@ public class SignUpActivity extends Activity {
                             setProgressBarIndeterminateVisibility(false);
                             if(e == null){
                                 //Success!
+                                RibbitApplication.updateParseInstalation(ParseUser.getCurrentUser());
                                 Intent intent = new Intent(SignUpActivity.this,MainActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
